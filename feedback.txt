@@ -1,0 +1,68 @@
+1. create project feedback
+2. create app reviews
+    2.1 create templates folder
+        2.1.1 create reviews folder
+    2.2 create urls.py file
+
+##create a basic form
+
+##Type of <button>
+    default type -> submit -> browser by default will craete a new http request and sends to server
+    button type -> normal button without any functionality
+
+### Client-server architecture:
+when we enter a  url in browser address bar our request is sent to backend server
+server runs django application and sends back template files / rendered html files based on our templates
+sever also talks to database
+
+GET request(default): it is always sent to server to get data
+                    #data encoded in url
+POST request: only fetch data and submitting data to server
+             #data is not encoded in url
+
+CSRF: Cross-Site Request Forgery
+    a token that prevents forgery
+    building request that looks like valid request but are not
+    
+    eg: building a website that is same as official banks' website and users think that it's aslo official website 
+        and starts filling their bank details in the website forms to send money,
+        then the attackers can steal data and modify the data and sends the malicious request to bank with modified data
+        so the money is transefred to attacker's account
+
+    we add dynamically generated token to our generated forms and that token then has to be sent to gather with the POST request
+     to our servers
+
+    if someone then fakes our site n build his/her own forms sending fake/manipulated data that token will be missing
+    as only official server knows how to build that token and how that token should look like
+
+    so only we are able to build the forms with valid token and attackers are not
+    and on every incoming request we can check whether valid token is part of request 
+    and we only accept data if it is part of request and then use data  
+
+    So, we add {% csrf_token %} in forms
+
+    django will generate a unique csrf token added in form and validates that token once our POST request arrives back on the server
+
+<action> tag: to set url after form dat is submitted
+    In forms,
+        <action="/"> -> same url even after submitting the data
+                O/p:   http://127.0.0.1:8000/
+        action="/user-review" -> after form is submitted the page will be routed to user-review url
+                O/p: http://127.0.0.1:8000/user-review
+
+Form Class:
+    django supports form Class
+    we need not create a form from scratch
+    if we use form class from django, django automatically renders form elements
+    for this, 
+            we need to craete a file forms.py for our app
+            import forms from django and craete the class consisting required elements (similar to models)
+            now just use {{form}} to render forms in html pages
+    djnago aslo provides validation of forms
+
+Interactive Shell:
+    >>> from reviews.models import Review
+    >>> Review.objects.all()
+    <QuerySet [<Review: Review object (1)>]>
+    >>> Review.objects.all()[0].user_name
+    'jahnavi'

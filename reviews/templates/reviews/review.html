@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Review</title>
+    <link rel="stylesheet" href="{% static 'reviews/styles.css' %}">
+</head>
+<body>
+    <form action="/" method="POST">
+        {% csrf_token %}
+{% comment %} ####### When using Normal forms ###### {% endcomment %}
+        {% comment %} {% if has_error %}
+            <p><h1>Please enter valid username</h1></p>
+        {% endif %}
+        <label for="username">Your name</label>
+        <input id="username" name="entered_name" type="text"> {% endcomment %}
+
+         {% comment %} ######## When using Forms with Class ######### {% endcomment %}
+         {% comment %} {{form}}  {% endcomment %} {% comment %} to render whole form {% endcomment %}
+
+         {% comment %} ######## Form Controls ######### {% endcomment %}
+        
+             {% comment %} Prinitng fields in form using for loop  {% endcomment %}
+         {% for field in form %}
+            <div class="form-control {% if field.errors %} errors{% endif %}">
+                {{field.label_tag}} {% comment "renders label" %}{% endcomment %}
+                {{field}} {% comment "renders input element itself" %}{% endcomment %}
+                {{field.errors}} {% comment "renders error msgs below the element" %}{% endcomment %}
+            </div>
+         {% endfor %}
+
+{% comment %}here, we are printing for each and every value manually instead, we can use "for loop"{% endcomment %}
+  <!-- 
+      <div class="form-control {% if form.user_name.errors %} errors{% endif %}">
+            {{form.user_name.label_tag}} {% comment "renders label" %}{% endcomment %}
+            {{form.user_name}} {% comment "renders input element itself" %}{% endcomment %}
+            {{form.user_name.errors}} {% comment "renders error msgs below the element" %}{% endcomment %}
+        </div>
+        <div class="form-control {% if form.review_text.errors %} errors{% endif %}">
+            {{form.review_text.label_tag}} {% comment "renders label" %}{% endcomment %}
+            {{form.review_text}} {% comment "renders input element itself" %}{% endcomment %}
+            {{form.review_text.errors}} {% comment "renders error msgs below the element" %}{% endcomment %}
+        </div>
+        <div class="form-control {% if form.rating.errors %} errors{% endif %}">
+            {{form.rating.label_tag}} {% comment "renders label" %}{% endcomment %}
+            {{form.rating}} {% comment "renders input element itself" %}{% endcomment %}
+            {{form.rating.errors}} {% comment "renders error msgs below the element" %}{% endcomment %}
+        </div>
+ -->  
+        <button>Send</button>
+    </form>
+</body>
+</html>

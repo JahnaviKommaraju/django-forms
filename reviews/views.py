@@ -8,23 +8,39 @@ def review(request):
 
     ######## When using Forms with Class #########
     if request.method =="POST":
-        form=ReviewForm(request.POST) #here, POST is collected data that is part of POST request
-        #and the collected data is the data entered in form by user
+        form=ReviewForm(request.POST) #populating form with submitted data
+    #      #here, POST is collected data that is part of POST request
+    #     #and the collected data is the data entered in form by user
 
-    # To vaidate the i/p:
-                #  data should not be empty
-                #if data is valid then it returns True else returns False
-                #if data is valid then it populates another field with that valid data
+        ####in method-2 --> save() for already existing_data
+        ##existing_data= Review.objects.get(pk=1)
+        ##form=ReviewForm(request.POST, instance=existing_data)
+    # # To vaidate the i/p:
+    #             #  data should not be empty
+    #             #if data is valid then it returns True else returns False
+    #             #if data is valid then it populates another field with that valid data
 
         if form.is_valid(): #if data is valid
-            # print(form.cleaned_data) #dictionary will be returned
-            review=Review(
-                user_name=form.cleaned_data['user_name'],
-                review_text=form.cleaned_data['review_text'],
-                rating=form.cleaned_data['rating']
-                )
-            review.save()
-            return HttpResponseRedirect('/thank-you')
+            ######### method-1 : 
+                    ##--> populating form with submitted data
+                    ##--> validating data
+                    ##--> if valid creating a model instance
+                    ##--> saving the form
+
+    #         # print(form.cleaned_data) #dictionary will be returned
+    #         review=Review(
+    #             user_name=form.cleaned_data['user_name'],
+    #             review_text=form.cleaned_data['review_text'],
+    #             rating=form.cleaned_data['rating']
+    #             )  #model instance
+    #         review.save()
+
+            #########(PREFER)method-2 : using model form
+            form.save() #saves data in database through that connected model(here, it is REVIEW Model)
+            #here, save() -> it is also used to update the exsiting data in form
+        return HttpResponseRedirect('/thank-you')
+
+
     
     else: #if data is not valid
         form=ReviewForm() #recreate the form

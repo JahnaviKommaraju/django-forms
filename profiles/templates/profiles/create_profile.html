@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Profile</title>
+    <link rel="stylesheet" href="{% static 'profiles/styles.css' %}">
+</head>
+<body>
+    <form action="/profiles/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {# enctype --> html attribute #}
+        {# it tells browser that this form when submitted will contain a file #}
+        {% comment %} <input type="file" name="image"/> {% endcomment %}
+        {{form}}
+        <button>Upload</button>
+    </form>
+</body>
+</html>

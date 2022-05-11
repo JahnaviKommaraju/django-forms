@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+{% extends 'reviews/base.html' %}
+
+{% block title %}Thank You{% endblock title %}
+
+{% block content %}
+
+    <h1>thank you for filling detials</h1>
+    <p>{{message}}</p>
+{% endblock content %}
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,4 +18,4 @@
 <body>
     Thank You For Filling The Details!
 </body>
-</html>
+</html> {% endcomment %}

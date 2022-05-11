@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf.urls.static import static #to serve uplaoded files
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('reviews.urls'))
+    path('', include('reviews.urls')),
+    path('profiles/',include('profiles.urls')),
 
-]
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+#mapping btw url n actual path on our file system is done by using static()
+    #to serve uplaoded files  

@@ -1,3 +1,25 @@
+{% extends 'reviews/base.html' %}
+
+{% block title %}Your Review{% endblock title %}
+
+{% block content %}
+
+    <form action="/" method="POST">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-control {% if field.errors %} errors{% endif %}"> 
+                {{field.label_tag}} {% comment "renders label" %}{% endcomment %}
+                {{field}} {% comment "renders input element itself" %}{% endcomment %}
+                {{field.errors}} {% comment "renders error msgs below the element" %}{% endcomment %}
+            </div>
+        {% endfor %}
+
+        <button type="submit">Send</button>
+
+{% endblock content %}
+
+{% comment %} 
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -24,13 +46,14 @@
          {% comment %} ######## Form Controls ######### {% endcomment %}
         
              {% comment %} Prinitng fields in form using for loop  {% endcomment %}
-         {% for field in form %}
-            <div class="form-control {% if field.errors %} errors{% endif %}">
-                {{field.label_tag}} {% comment "renders label" %}{% endcomment %}
-                {{field}} {% comment "renders input element itself" %}{% endcomment %}
-                {{field.errors}} {% comment "renders error msgs below the element" %}{% endcomment %}
-            </div>
-         {% endfor %}
+
+         {% comment %} {% for field in form %}
+            <div class="form-control {% if field.errors %} errors{% endif %}"> {% endcomment %}
+                {% comment %} {{field.label_tag}} {% comment "renders label" %}{% endcomment %} 
+                {% comment %} {{field}} {% comment "renders input element itself" %}{% endcomment %} 
+                {% comment %} {{field.errors}} {% comment "renders error msgs below the element" %}{% endcomment %}
+            {% comment %} </div>
+         {% endfor %} {% endcomment %}
 
 {% comment %}here, we are printing for each and every value manually instead, we can use "for loop"{% endcomment %}
   <!-- 
@@ -50,7 +73,7 @@
             {{form.rating.errors}} {% comment "renders error msgs below the element" %}{% endcomment %}
         </div>
  -->  
-        <button>Send</button>
+        {% comment %} <button>Send</button> 
     </form>
 </body>
-</html>
+</html> {% endcomment %}

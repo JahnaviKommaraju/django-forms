@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'reviews',
+    'profiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -117,6 +118,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+MEDIA_ROOT = BASE_DIR/"uploads" #path on file system where the files are physically stored
+MEDIA_URL= "/user-media/" #url to be shown to outside world from which these files can be loaded
+
+# SESSION_COOKIE_AGE = 120 #i.e 2min #time-limit for sessions n default is 2weeks
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -1,0 +1,26 @@
+{% extends 'reviews/base.html' %}
+
+{% block title %}All Reviews{% endblock title %}
+
+{% block content %}
+
+    <ul> 
+        {% comment %} {% for review in object_list %} {# django by default uses object_list when we use ListView #} {% endcomment %}
+        {#  context_object_name="reviews" is used in views to change the defualt object_list name #} 
+        {% for review in reviews %}
+            <li>{{review.user_name}}</li>
+            <li>{{review.review_text}}</li>
+            <li>{{review.rating}}</li>
+            <br/>
+        {% endfor %}
+
+
+        {% comment %} Template View {% endcomment %}
+        {% comment %} {% for review in reviews %}
+            <li>{{review.user_name}}</li>
+            <li>{{review.review_text}}</li>
+            <li>{{review.rating}}</li>
+            <br/>
+        {% endfor %} {% endcomment %}
+    </ul>
+{% endblock content %}

@@ -1,0 +1,36 @@
+What is a Session?
+    - A "ongoing connection" btw a client(browser) n server
+    - ongoing connection: It persists n lives on 
+                even if
+                    -browser is closed in btween    
+                    -computer/system is shut down
+    - long term relation btw a client(browser) n server
+    - It can be cleared n deleted n reset
+    - Developer can decide how long it can live
+    
+    Sessions are abt,
+        - storing data n storing information
+        - data stored in a session persists as long as the session is active/ until that data is cleared 
+
+    Server:
+        django application running on a server stores session data n a unique session indentifier 
+        bcoz mutilple users of same website will have mutilple sessions n every user will have his/her own session
+        So, every session for different users has its own unique indentifier n the server stores session specific data n indentifier, typically in a database
+        but it could be any session storage, for eg it could be any file
+    
+    Client(browser):
+        browser stores a cookie which is sent by the server which contains that session identifier. So, with that the client is then enable for future for future requests to
+        send that cookie to the server,
+
+        then server can look up that session in the database n send that session specific data back to client n do whatever needs to be done with that session data.
+
+    eg:
+        If session data contains the information that this client is logged in already the server may grant access to protect the resources
+
+Django will do all these under the hood,
+        django will already craete that cookie send that cookie to client n will store the session in database.
+    
+As a Developer, we just need to configure how the session shld behave
+like: - how long session shld be active and then we can write data to that session n also read data from it
+
+We shld not store objects in session and we have to store primitives like strings,numbers, booleans,dictionaries etc.

@@ -1,5 +1,5 @@
-1. create project feedback
-2. create app reviews
+1. create project-> feedback
+2. create app-> reviews
     2.1 create templates folder
         2.1.1 create reviews folder
     2.2 create urls.py file
